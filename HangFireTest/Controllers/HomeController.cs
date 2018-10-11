@@ -4,30 +4,14 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using MVC.Models;
+using HangFireTest.Models;
 
-namespace MVC.Controllers
+namespace HangFireTest.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
         public IActionResult Index()
         {
-            _logger.LogTrace("HomeController _logger.LogTrace");
-            _logger.LogDebug("HomeController _logger.LogDebug");
-            _logger.LogInformation("HomeController _logger.LogInformation");
-            _logger.LogWarning("HomeController _logger.LogWarning");
-            _logger.LogError("HomeController _logger.LogError");
-            _logger.LogCritical("HomeController _logger.LogCritical");
-
-
             return View();
         }
 
@@ -42,8 +26,6 @@ namespace MVC.Controllers
         {
             ViewData["Message"] = "Your contact page.";
 
-            throw new Exception("Contact Exception Test!!!");
-
             return View();
         }
 
@@ -51,9 +33,6 @@ namespace MVC.Controllers
         {
             return View();
         }
-
-
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
