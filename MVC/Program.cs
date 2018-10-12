@@ -18,7 +18,9 @@ namespace MVC
         {
 
             // NLog: setup the logger first to catch all errors
-            var logger = NLog.Web.NLogBuilder.ConfigureNLog("Config/nlog.config").GetCurrentClassLogger();
+            //var logger = NLog.Web.NLogBuilder.ConfigureNLog("Config/nlog.config").GetCurrentClassLogger();
+            //编译时会有缓存问题，坑爹啊
+            var logger = NLog.Web.NLogBuilder.ConfigureNLog("Config/nlogTracking.config").GetCurrentClassLogger();
             try
             {
                 logger.Debug("init main");

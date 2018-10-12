@@ -11,11 +11,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Log\" />
+    <Folder Include="logs\" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Update="Config\nlog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Config\nlogTracking.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

@@ -10,6 +10,8 @@ using Microsoft.Extensions.Logging;
 
 namespace SwaggerTest
 {
+    //取消类警告 //全部取消：<NoWarn>$(NoWarn);1591</NoWarn>
+#pragma warning disable CS1591
     public class Program
     {
         public static void Main(string[] args)
@@ -21,4 +23,5 @@ namespace SwaggerTest
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
     }
+#pragma warning restore CS1591
 }
