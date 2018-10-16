@@ -33,9 +33,15 @@ namespace MongoDBTest
 
             //配置注入
             services.Configure<MongoDBSettings>(Configuration.GetSection("MongoConnection"));
-
             services.AddTransient<IBookRepository, BookRepository>();
 
+            //配置绑定，在当前配置中使用
+            //var list = new List<RabbitMQSetting>();
+            //Configuration.GetSection("TrackingCrawlerRabbitMQSettings").Bind(list);
+            //for (int i = 0; i < list.Count; i++)
+            //{
+            //    services.Configure<RabbitMQSetting>(list[i].ServerName, Configuration.GetSection($"TrackingCrawlerRabbitMQSettings:{i}"));
+            //}
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
