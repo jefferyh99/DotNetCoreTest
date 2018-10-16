@@ -1,8 +1,11 @@
 ﻿
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDBTest.Model;
+using MongoDBTest.Repository.Base;
+using MongoDBTest.Setting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,31 +16,30 @@ namespace MongoDBTest.Repository
     /// <summary>
     /// https://blog.oz-code.com/how-to-mongodb-in-c-part-1/
     /// </summary>
-    public class DataAccess
+    public class BookRepository : IBookRepository
     {
         MongoClient _client;
         IMongoDatabase _db;
-        public IConfiguration Configuration { get; }
+        public MongoDBSettings MongoDBSetting { get; }
 
         //.net core 与 .net framework API 有点区别
-        public DataAccess(IConfiguration configuration)
+        public BookRepository(IOptions<MongoDBSettings> mongoDBSetting)
         {
-            Configuration = configuration;
-            _client = new MongoClient(Configuration.GetSection("MongoConnection:ConnectionString").Value);
-            _db = _client.GetDatabase(Configuration.GetSection("MongoConnection:Database").Value);
+            MongoDBSetting = mongoDBSetting.Value;
+            _client = new MongoClient(MongoDBSetting.ConnectionString);
+            _db = _client.GetDatabase(MongoDBSetting.Database);
         }
 
-    public IEnumerable<Book> GetBooks()
+        public IEnumerable<Book> GetBooks()
         {
             //AsQueryable() 支持linq
             return _db.GetCollection<Book>("Books").AsQueryable().ToList();
         }
-
         public Book GetBook(string id)
         {
             var builder = Builders<Book>.Filter;
             var filter = builder.Eq(c => c.Id, id);
-            var result = _db.GetCollection<Book>("Books").Find(filter).FirstOrDefault();
+            var result = _db.GetCollection<Book>("Books").Find(filter).SortBy(p => p.Id).FirstOrDefault();
 
             var result2 = _db.GetCollection<Book>("Books").AsQueryable().Where(p => p.Id.Equals(id)).FirstOrDefault();
             return result2;

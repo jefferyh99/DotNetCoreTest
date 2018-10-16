@@ -4,8 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDBTest.Repository;
+using MongoDBTest.Repository.Base;
+using MongoDBTest.Setting;
 using Newtonsoft.Json;
 
 namespace MongoDBTest.Controllers
@@ -14,21 +17,20 @@ namespace MongoDBTest.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        public IBookRepository Repository { get; }
+       
 
-        public IConfiguration Configuration { get; }
-
-        public ValuesController(IConfiguration configuration)
+        public ValuesController(IBookRepository repository)
         {
-            Configuration = configuration;
+            Repository = repository;
         }
 
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            //需要使用依赖注入
-            //update
-            //var book = new DataAccess(Configuration).Create(new Model.Book()
+
+            //var book = Repository.Create(new Model.Book()
             //{
             //    Author = "abc",
             //    BookName = "BookName",
@@ -40,7 +42,7 @@ namespace MongoDBTest.Controllers
             //return new List<string>() { JsonConvert.SerializeObject(book) };
 
             //List
-            var books = new DataAccess(Configuration).GetBooks();
+            var books = Repository.GetBooks();
             return new List<string>() { JsonConvert.SerializeObject(books) };
 
         }
@@ -49,7 +51,7 @@ namespace MongoDBTest.Controllers
         [HttpGet("{id}")]
         public ActionResult<string> Get(string id)
         {
-            var book = new DataAccess(Configuration).GetBook(id);
+            var book = Repository.GetBook(id);
             return JsonConvert.SerializeObject(book);
         }
 

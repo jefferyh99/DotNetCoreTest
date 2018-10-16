@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using AutoFactTest.Modules;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,11 +13,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using MongoDBTest.Repository;
-using MongoDBTest.Repository.Base;
-using MongoDBTest.Setting;
 
-namespace MongoDBTest
+namespace AutoFactTest
 {
     public class Startup
     {
@@ -26,16 +26,17 @@ namespace MongoDBTest
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        // 通过注入服务的方式，让程序获得某些能力
-        public void ConfigureServices(IServiceCollection services)
+        //要使用第三方容器，Startup.ConfigureServices 必须返回 IServiceProvider。
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            //配置注入
-            services.Configure<MongoDBSettings>(Configuration.GetSection("MongoConnection"));
-
-            services.AddTransient<IBookRepository, BookRepository>();
-
+            // Add Autofac
+            var containerBuilder = new ContainerBuilder();
+            containerBuilder.RegisterModule<DefaultModule>();
+            containerBuilder.Populate(services);
+            var container = containerBuilder.Build();
+            return new AutofacServiceProvider(container);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

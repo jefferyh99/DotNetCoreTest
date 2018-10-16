@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwaggerTest", "SwaggerTest\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUnitTestProject1", "XUnitTestProject1\XUnitTestProject1.csproj", "{166A482A-4C72-49DC-8829-78B3DEE8A331}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HangFireTest", "HangFireTest\HangFireTest.csproj", "{DCA6D9A6-42AD-4E5A-B485-C9B568E08D19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HangFireTest", "HangFireTest\HangFireTest.csproj", "{DCA6D9A6-42AD-4E5A-B485-C9B568E08D19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoDBTest", "MongoDBTest\MongoDBTest.csproj", "{BC545076-31DC-4FE4-A213-D909BF695533}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MongoDBTest", "MongoDBTest\MongoDBTest.csproj", "{BC545076-31DC-4FE4-A213-D909BF695533}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoFactTest", "AutoFactTest\AutoFactTest.csproj", "{36B0BD9C-B694-4004-819A-6B1E1F568DF8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{BC545076-31DC-4FE4-A213-D909BF695533}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC545076-31DC-4FE4-A213-D909BF695533}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC545076-31DC-4FE4-A213-D909BF695533}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36B0BD9C-B694-4004-819A-6B1E1F568DF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36B0BD9C-B694-4004-819A-6B1E1F568DF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36B0BD9C-B694-4004-819A-6B1E1F568DF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36B0BD9C-B694-4004-819A-6B1E1F568DF8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
