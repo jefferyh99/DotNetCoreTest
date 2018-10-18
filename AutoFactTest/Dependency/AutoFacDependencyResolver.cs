@@ -40,12 +40,16 @@ namespace AutoFactTest.Dependency
 
         public T Resolve<T>(Type type)
         {
-            return _container.Resolve<T>();
+            object obj = _container.Resolve(type);
+            if (obj != null)
+                return (T)obj;
+            else
+                return default(T);
         }
 
         public T Resolve<T>(string name)
         {
-            throw new NotImplementedException();
+            return _container.ResolveNamed<T>(name);
         }
 
         public IEnumerable<T> ResolveAll<T>()

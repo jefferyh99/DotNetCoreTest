@@ -28,7 +28,7 @@ namespace AutoFactTest.Controllers
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
-            return IoC.Resolve<ITest>().GetTestName();
+            return IoC.Resolve<ITest>("Test1").GetTestName() + " " + IoC.Resolve<ITest>("Test2").GetTestName();
         }
 
         // POST api/values
