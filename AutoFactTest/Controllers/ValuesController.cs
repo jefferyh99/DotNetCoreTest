@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoFactTest.Dependency;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AutoFactTest.Controllers
@@ -10,18 +11,24 @@ namespace AutoFactTest.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private ITest _testService;
+        public ValuesController(ITest testService)
+        {
+            _testService = testService;
+        }
+
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new string[] { _testService.GetTestName() };
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
-            return "value";
+            return IoC.Resolve<ITest>().GetTestName();
         }
 
         // POST api/values

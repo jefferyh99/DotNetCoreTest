@@ -8,6 +8,11 @@ namespace AutoFactTest.Modules
 {
     public class DefaultModule : Module
     {
+        protected override void Load(ContainerBuilder builder)
+        {
+            builder.RegisterType<Test1>().As<ITest>().InstancePerLifetimeScope();
 
+           
+        }
     }
 }

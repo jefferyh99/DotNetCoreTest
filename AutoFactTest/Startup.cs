@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using AutoFactTest.Dependency;
 using AutoFactTest.Modules;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,12 +32,25 @@ namespace AutoFactTest
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            #region Add Autofac
             // Add Autofac
-            var containerBuilder = new ContainerBuilder();
-            containerBuilder.RegisterModule<DefaultModule>();
-            containerBuilder.Populate(services);
-            var container = containerBuilder.Build();
-            return new AutofacServiceProvider(container);
+            //var containerBuilder = new ContainerBuilder();
+            //containerBuilder.RegisterModule<DefaultModule>();
+
+            //containerBuilder.Populate(services);
+            //var container = containerBuilder.Build();
+
+            //return new AutofacServiceProvider(container);
+            #endregion
+
+            #region Add Autofac WithInterfact
+
+            var autoFactDependencyResolver = new AutoFacDependencyResolver(services);
+            IoC.Initialize(autoFactDependencyResolver);
+            return new AutofacServiceProvider(autoFactDependencyResolver.Container);
+
+            #endregion
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
