@@ -40,6 +40,14 @@ namespace MVC
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            #region IIS Option
+            services.Configure<IISOptions>(option=> {
+                //https://docs.microsoft.com/zh-cn/aspnet/core/host-and-deploy/iis/?view=aspnetcore-2.1
+                option.ForwardClientCertificate = false;
+            });
+            #endregion
+
+
             #region 可能解决中文被编码
             //解决中文被编码
             //services.AddSingleton(HtmlEncoder.Create(UnicodeRanges.All));
@@ -114,6 +122,8 @@ namespace MVC
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+         
 
             #region app.Use
             //app.Use((context, next) =>
