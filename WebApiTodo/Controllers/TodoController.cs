@@ -9,6 +9,7 @@ using TodoApi.Models;
 
 namespace TodoApi.Controllers
 {
+    [Produces("application/json")]//响应
     [Route("api/v1/[controller]")]
     [ApiController]
     public class TodoController : ControllerBase
@@ -28,8 +29,27 @@ namespace TodoApi.Controllers
             }
         }
 
-        // POST: api/Todo
+        /// <summary>
+        /// Creates a TodoItem.
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /Todo
+        ///     {
+        ///        "id": 1,
+        ///        "name": "Item1",
+        ///        "isComplete": true
+        ///     }
+        ///
+        /// </remarks>
+        /// <param name="item"></param>
+        /// <returns>A newly created TodoItem</returns>
+        /// <response code="201">Returns the newly created item</response>
+        /// <response code="400">If the item is null</response>       
         [HttpPost]
+        [ProducesResponseType(201)]
+        [ProducesResponseType(400)]
         public async Task<ActionResult<TodoItem>> PostTodoItem(TodoItem item)
         {
             _context.TodoItems.Add(item);
@@ -74,7 +94,12 @@ namespace TodoApi.Controllers
         }
 
         // PATCH: api/Todo/5 
-        //部分更新
+        /// <summary>
+        /// 部分更新
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
         [HttpPatch("{id}")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -127,7 +152,7 @@ namespace TodoApi.Controllers
 
         //数组用逗号隔开
         //Query1,
-        [HttpGet]
+        [HttpGet("NoNeed")]
         public async Task<ActionResult<IEnumerable<TodoItem>>> GetTodoItemsByQuery1([FromQuery]TodoItem item)
         {
             return await _context.TodoItems.Where(p => p.Name.Equals(item.Name)).ToListAsync();
