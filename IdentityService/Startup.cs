@@ -29,7 +29,8 @@ namespace IdentityService
             InMemoryConfiguration.Configuration = this.Configuration;
 
             services.AddIdentityServer()
-            .AddDeveloperSigningCredential()//生产环境时需要使用AddSigningCredential()
+            .AddDeveloperSigningCredential()
+            //生产环境时需要使用AddSigningCredential()
             .AddTestUsers(InMemoryConfiguration.GetUsers().ToList())
             .AddInMemoryClients(InMemoryConfiguration.GetClients())
             .AddInMemoryApiResources(InMemoryConfiguration.GetApiResources());
@@ -58,15 +59,21 @@ namespace IdentityService
     {
         public static IConfiguration Configuration { get; set; }
         /// <summary>
-        /// Define which APIs will use this IdentityServer
+        /// Define which APIs will use this IdentityServer(AllowedScopes)
         /// </summary>
         /// <returns></returns>
         public static IEnumerable<ApiResource> GetApiResources()
         {
             return new[]
             {
-                new ApiResource("clientservice", "CAS Client Service"),
-                new ApiResource("productservice", "CAS Product Service"),
+                //用于绑定站点的,微服务的站点名称
+                new ApiResource("clientservice", "CAS Client Service"){
+                   ApiSecrets = { new Secret("api1pwd".Sha256()) },
+                  
+                },
+                new ApiResource("productservice", "CAS Product Service"){
+                     ApiSecrets = { new Secret("api1pwd".Sha256()) },
+                },
                 new ApiResource("agentservice", "CAS Agent Service")
             };
         }
@@ -81,17 +88,21 @@ namespace IdentityService
             {
                 new Client
                 {
-                    ClientId = "client.api.service",
-                    ClientSecrets = new [] { new Secret("clientsecret".Sha256()) },
-                    AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
-                    AllowedScopes = new [] { "clientservice" }
+                    ClientId = "client.api.service",//client_id
+                    ClientSecrets = new [] { new Secret("clientsecret".Sha256())},//client_secret
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,//grant_type
+                    AllowedScopes = new [] { "clientservice" },//某站点可以通过这个服务授权
+                    AccessTokenType = AccessTokenType.Jwt
+                    
                 },
                 new Client
                 {
                     ClientId = "product.api.service",
                     ClientSecrets = new [] { new Secret("productsecret".Sha256()) },
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
-                    AllowedScopes = new [] { "clientservice", "productservice" }
+                    AllowedScopes = new [] { "clientservice", "productservice" },
+                    
+
                 },
                 new Client
                 {
@@ -125,7 +136,7 @@ namespace IdentityService
                 },
                 new TestUser
                 {
-                    SubjectId = "10003",
+                    SubjectId = "10003",//sub 主题
                     Username = "leo@hotmail.com",
                     Password = "leopassword"
                 }

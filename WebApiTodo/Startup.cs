@@ -33,6 +33,20 @@ namespace WebApiTodo
             services.AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase("TodoList"));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            //Install-Package IdentityServer4.AccessTokenValidation
+            //IdentityServer
+            services.AddMvcCore().AddAuthorization().AddJsonFormatters();
+            services.AddAuthentication(Configuration["Identity:Scheme"]).AddIdentityServerAuthentication(options => {
+                options.RequireHttpsMetadata = false;//// for dev env
+                options.Authority = $"http://{Configuration["Identity:IP"]}:{Configuration["Identity:Port"]}";
+                options.ApiName = Configuration["Service:Name"]; // match with configuration in IdentityServer
+                options.ApiSecret = Configuration["Service:Password"];
+                
+
+            });
+
+
+
 
             //Install-Package Swashbuckle.AspNetCore
             // Register the Swagger generator, defining 1 or more Swagger documents
@@ -83,6 +97,11 @@ namespace WebApiTodo
 
             //app.UseStaticFiles();
 
+            // authentication
+            app.UseAuthentication();
+
+            app.UseMvc();
+
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
@@ -94,8 +113,6 @@ namespace WebApiTodo
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");//如果使用目录及 IIS 或反向代理，请使用 ./ 前缀将 Swagger 终结点设置为相对路径。
                 //c.RoutePrefix = "";//http://localhost:<port>/index.html)或者修改launchSettings.json
             });
-
-            app.UseMvc();
         }
     }
 }
