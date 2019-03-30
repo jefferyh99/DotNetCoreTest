@@ -147,6 +147,7 @@ namespace TodoApi.Controllers
         //[HttpGet("/Product/{id}",Name = "Products_List")]
         //注意，很少会使用获取全部，通常都有参数，所以就拿最多参数的就可以
         [HttpGet]
+        [Authorize(Policy = "ScopePolicy")]
         public async Task<ActionResult<IEnumerable<TodoItem>>> GetTodoItems()
         {
             return await _context.TodoItems.ToListAsync();

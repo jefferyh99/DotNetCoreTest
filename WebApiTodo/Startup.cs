@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using IdentityServer4.AccessTokenValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -35,15 +38,26 @@ namespace WebApiTodo
 
             //Install-Package IdentityServer4.AccessTokenValidation
             //IdentityServer
-            services.AddMvcCore().AddAuthorization().AddJsonFormatters();
-            services.AddAuthentication(Configuration["Identity:Scheme"]).AddIdentityServerAuthentication(options => {
-                options.RequireHttpsMetadata = false;//// for dev env
-                options.Authority = $"http://{Configuration["Identity:IP"]}:{Configuration["Identity:Port"]}";
-                options.ApiName = Configuration["Service:Name"]; // match with configuration in IdentityServer
-                options.ApiSecret = Configuration["Service:Password"];
-                
+            //The ApiName property checks if the token has a matching audience (or short aud) claim.
+            services.AddMvcCore().AddJsonFormatters().AddAuthorization(options => 
+            options.AddPolicy("ScopePolicy", builder =>
+              {
+                 
+                  builder.RequireScope("clientservice.Scope1");
+                  //builder.RequireRole("superman");//还没有研究出来怎么用
+                  builder.RequireClaim(ClaimTypes.Role, "superman");
 
-            });
+                 
+              }));
+            services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme).
+                AddIdentityServerAuthentication(options =>
+                {
+                    options.RequireHttpsMetadata = false;//// for dev env
+                    options.Authority = $"http://{Configuration["Identity:IP"]}:{Configuration["Identity:Port"]}";
+                    options.ApiName = Configuration["Service:Name"]; // match with configuration in IdentityServer
+                    options.ApiSecret = Configuration["Service:Password"];
+
+                });
 
 
 
@@ -53,7 +67,8 @@ namespace WebApiTodo
             // 头信息
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info {
+                c.SwaggerDoc("v1", new Info
+                {
                     Title = "My API",
                     Version = "v1",
                     Description = "A simple example ASP.NET Core Web API",
