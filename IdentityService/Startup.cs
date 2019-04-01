@@ -85,7 +85,8 @@ namespace IdentityService
                    },
                    UserClaims = new List<string>(){
                        ClaimTypes.Role
-                   }
+                   },
+                   
 
                 },
                 new ApiResource("productservice", "CAS Product Service"){
@@ -115,7 +116,8 @@ namespace IdentityService
                         //new Claim(ClaimTypes.Role,"superman"),
                         //new Claim(ClaimTypes.Name,"Name"),
                         //new Claim(ClaimTypes.MobilePhone,"123456789")
-                    }
+                    },
+                    
 
                 },
                 new Client
@@ -132,7 +134,7 @@ namespace IdentityService
                     ClientId = "agent.api.service",
                     ClientSecrets = new [] { new Secret("agentsecret".Sha256()) },
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
-                    AllowedScopes = new [] { "agentservice", "clientservice", "productservice" }
+                    AllowedScopes = new [] { "agentservice", "clientservice", "productservice" },
                 }
             };
         }
@@ -155,7 +157,7 @@ namespace IdentityService
                     Claims = new List<Claim>(){
                         new Claim(ClaimTypes.Role,"superman"),
                         new Claim(ClaimTypes.MobilePhone,"1234567891")
-                    },
+                    },                  
                 },
                 new TestUser
                 {

@@ -61,6 +61,13 @@ namespace SwaggerTest
 
 
             });
+
+            //配置允许跨域访问
+            services.AddCors(options => options.AddPolicy("AllowAll", p =>
+                   p.AllowAnyOrigin()//設置允許來源,Access-Control-Allow-Origin
+                   .AllowAnyMethod()//设置允许方法
+                   .AllowAnyHeader()//设置允许标头
+                   .AllowCredentials()));//Access-Control-Allow-Credentials
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,6 +79,9 @@ namespace SwaggerTest
             }
             else
             {
+                //HSTS 中间件 (UseHsts) 发送给客户端的 HTTP 严格传输安全性协议 (HSTS) 标头
+                //Strict Transport Security
+                //UseHsts isn't recommended in development because the HSTS settings are highly cacheable by browsers. By default, UseHsts excludes the local loopback address.
                 app.UseHsts();
             }
 
@@ -92,6 +102,7 @@ namespace SwaggerTest
             //启动允许跨域访问
             app.UseCors("AllowAll");
             //https
+            //HTTPS 重定向中间件 (UseHttpsRedirection) 将 HTTP 请求重定向到 HTTPS
             app.UseHttpsRedirection();
             app.UseMvc();
         }
