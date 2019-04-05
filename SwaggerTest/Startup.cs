@@ -104,7 +104,7 @@ namespace SwaggerTest
             //https
             //HTTPS 重定向中间件 (UseHttpsRedirection) 将 HTTP 请求重定向到 HTTPS
             app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseMvcWithDefaultRoute();
         }
     }
 }

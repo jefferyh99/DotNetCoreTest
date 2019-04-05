@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using IdentityModel;
+using IdentityServer4;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
 using Microsoft.AspNetCore.Builder;
@@ -30,13 +31,29 @@ namespace IdentityService
         {
             InMemoryConfiguration.Configuration = this.Configuration;
 
-            services.AddIdentityServer()
+            services.AddIdentityServer(options =>
+            {
+                options.Events.RaiseErrorEvents = true;
+                options.Events.RaiseFailureEvents = true;
+                options.Events.RaiseInformationEvents = true;
+                options.Events.RaiseSuccessEvents = true;
+            })
             .AddDeveloperSigningCredential()
             //生产环境时需要使用AddSigningCredential()
-            .AddTestUsers(InMemoryConfiguration.GetUsers().ToList())
-            .AddInMemoryClients(InMemoryConfiguration.GetClients())
             .AddInMemoryApiResources(InMemoryConfiguration.GetApiResources())
-            .AddInMemoryIdentityResources(InMemoryConfiguration.GetIdentityResources());
+            .AddInMemoryIdentityResources(InMemoryConfiguration.GetIdentityResources())
+            .AddInMemoryClients(InMemoryConfiguration.GetClients())
+            .AddTestUsers(InMemoryConfiguration.GetUsers().ToList());
+
+            // add CORS policy for non-IdentityServer endpoints
+            services.AddCors(options =>
+            {
+                options.AddPolicy("api", policy =>
+                {
+                    policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                });
+            });
+
 
 
         }
@@ -48,6 +65,8 @@ namespace IdentityService
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("api");
 
             app.UseIdentityServer();
         }
@@ -86,7 +105,7 @@ namespace IdentityService
                    UserClaims = new List<string>(){
                        ClaimTypes.Role
                    },
-                   
+
 
                 },
                 new ApiResource("productservice", "CAS Product Service"){
@@ -105,7 +124,8 @@ namespace IdentityService
         {
             return new[]
             {
-                new Client
+                #region MyRegion
+                 new Client
                 {
                     ClientId = "client.api.service",//client_id
                     ClientSecrets = new [] { new Secret("clientsecret".Sha256())},//client_secret
@@ -117,7 +137,7 @@ namespace IdentityService
                         //new Claim(ClaimTypes.Name,"Name"),
                         //new Claim(ClaimTypes.MobilePhone,"123456789")
                     },
-                    
+
 
                 },
                 new Client
@@ -135,7 +155,26 @@ namespace IdentityService
                     ClientSecrets = new [] { new Secret("agentsecret".Sha256()) },
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
                     AllowedScopes = new [] { "agentservice", "clientservice", "productservice" },
-                }
+                },
+	#endregion
+               
+                //用户客户端MVC验证
+                new Client
+                {
+                    ClientId = "cas.mvc.client.implicit",//与MVC中设置一致
+                    ClientName = "CAS MVC Web App Client",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    //RedirectUris = { $"http://{Configuration["Clients:MvcClient:IP"]}:{Configuration["Clients:MvcClient:Port"]}/signin-oidc" },
+                    //PostLogoutRedirectUris = { $"http://{Configuration["Clients:MvcClient:IP"]}:{Configuration["Clients:MvcClient:Port"]}/signout-callback-oidc" },
+                    AllowedScopes = new [] {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "agentservice", "clientservice", "productservice"
+                    },
+
+                    //oidc而不是bearer的模式
+                    AllowAccessTokensViaBrowser = true // can return access_token to this client
+                },
             };
         }
 
@@ -157,7 +196,7 @@ namespace IdentityService
                     Claims = new List<Claim>(){
                         new Claim(ClaimTypes.Role,"superman"),
                         new Claim(ClaimTypes.MobilePhone,"1234567891")
-                    },                  
+                    },
                 },
                 new TestUser
                 {
@@ -174,11 +213,16 @@ namespace IdentityService
             };
         }
 
+        /// <summary>
+        /// 身份资源也是数据，如用户ID，姓名或用户的电子邮件地址。
+        /// </summary>
+        /// <returns></returns>
         public static IEnumerable<IdentityResource> GetIdentityResources()
         {
             return new IdentityResource[]
             {
-                new IdentityResources.OpenId()
+                new IdentityResources.OpenId(),
+                new IdentityResources.Profile(),
             };
         }
     }
