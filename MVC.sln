@@ -21,7 +21,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WorkSpace", "WorkSpace", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiTodo", "WebApiTodo\WebApiTodo.csproj", "{86785397-D2B9-430E-87B7-93F7ADCBF087}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityService", "IdentityService\IdentityService.csproj", "{CBBD0791-F7C4-479C-B4C6-6A19CC752FAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityService", "IdentityService\IdentityService.csproj", "{CBBD0791-F7C4-479C-B4C6-6A19CC752FAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OcelotTest", "OcelotTest\OcelotTest.csproj", "{CF6FC443-94AD-44CA-9C69-233F35FB903F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,10 @@ Global
 		{CBBD0791-F7C4-479C-B4C6-6A19CC752FAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBBD0791-F7C4-479C-B4C6-6A19CC752FAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBBD0791-F7C4-479C-B4C6-6A19CC752FAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF6FC443-94AD-44CA-9C69-233F35FB903F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF6FC443-94AD-44CA-9C69-233F35FB903F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF6FC443-94AD-44CA-9C69-233F35FB903F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF6FC443-94AD-44CA-9C69-233F35FB903F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,6 +80,7 @@ Global
 		{36B0BD9C-B694-4004-819A-6B1E1F568DF8} = {3D2B6553-0D96-430E-B7BF-EC1C415BDCC8}
 		{86785397-D2B9-430E-87B7-93F7ADCBF087} = {3D2B6553-0D96-430E-B7BF-EC1C415BDCC8}
 		{CBBD0791-F7C4-479C-B4C6-6A19CC752FAC} = {3D2B6553-0D96-430E-B7BF-EC1C415BDCC8}
+		{CF6FC443-94AD-44CA-9C69-233F35FB903F} = {F2CAD961-DBE2-4A0B-A34C-99918A57B1CD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2E0AC939-51E8-48B4-A5C2-3F3757CB599B}

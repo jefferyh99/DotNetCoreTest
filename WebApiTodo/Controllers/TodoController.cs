@@ -13,7 +13,7 @@ namespace TodoApi.Controllers
     [Produces("application/json")]//响应
     [Route("api/v1/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class TodoController : ControllerBase
     {
         private readonly TodoContext _context;
@@ -138,27 +138,36 @@ namespace TodoApi.Controllers
             return todoItem;
         }
 
-        #region 不管参数，会路由到同一个方法，可以合并到一起，查询与获取
+        #region 路由不支持重载，会路由到最多参数上面，会路由到同一个方法，可以合并到一起，查询与获取
 
 
 
         // GET: api/Todo
         //[HttpGet("/Product")]//上升到根目錄
         //[HttpGet("/Product/{id}",Name = "Products_List")]
-        //注意，很少会使用获取全部，通常都有参数，所以就拿最多参数的就可以
+        //注意，很少会使用获取全部，通常都有参数，所以就拿最多参数的就可以，线上时用下面的带查询参数的，不用这个无参数的，除非没有查询的，有查询的话用下面的
         [HttpGet]
-        [Authorize(Policy = "ScopePolicy")]
+        //[Authorize(Policy = "ScopePolicy")]
         public async Task<ActionResult<IEnumerable<TodoItem>>> GetTodoItems()
         {
             return await _context.TodoItems.ToListAsync();
         }
 
-        //数组用逗号隔开
+        //数组用逗号隔开ssm.chukou1.com?querry1=a,b,c&querry2=d,e,f
         //Query1,
         [HttpGet("NoNeed")]
+        //[HttpGet]//会报错，因为不支持重载
         public async Task<ActionResult<IEnumerable<TodoItem>>> GetTodoItemsByQuery1([FromQuery]TodoItem item)
         {
-            return await _context.TodoItems.Where(p => p.Name.Equals(item.Name)).ToListAsync();
+            if (item == null)
+            {
+                return await _context.TodoItems.ToListAsync();
+            }
+            else
+            {
+                return await _context.TodoItems.Where(p => p.Name.Equals(item.Name)).ToListAsync();
+            }
+            
         }
 
         //Query2
