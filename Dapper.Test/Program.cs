@@ -28,11 +28,15 @@ namespace Dapper.Test
 
 
             var connectionString = config["Localdb:ConnectionString"];
-            test_insert(connectionString);
-            test_mult_insert(connectionString);
+            //test_insert(connectionString);
+            //test_mult_insert(connectionString);
 
-            test_select_one(connectionString);
-            test_select_list(connectionString);
+            //test_select_one(connectionString);
+            //test_select_list(connectionString);
+            //test_insert_content_with_comment(connectionString);
+
+            //test_select_content_with_comment(connectionString);
+            test_select_content_with_comment_join(connectionString);
 
             Console.ReadKey();
         }
@@ -53,8 +57,13 @@ namespace Dapper.Test
             {
                 string sql_insert = @"INSERT INTO [Content]
                 (title, [content], status, add_time, modify_time)
-                VALUES   (@title,@content,@status,@add_time,@modify_time)";
+                VALUES   (@title,@content,@status,@add_time,@modify_time);select @@IDENTITY";
+
+                //插入成功数据的数量
                 var result = conn.Execute(sql_insert, content);
+
+                //获取刚插入的自增Id
+                //var result1 = conn.ExecuteScalar(sql_insert, content);//select @@IDENTITY
 
                 Console.WriteLine($"test_insert：插入了{result}条数据！");
             }
@@ -137,24 +146,18 @@ VALUES   (@title,@content,@status,@add_time,@modify_time)";
             {
                 string sql_insert = @"INSERT INTO[Content]
                     (title, [content], status, add_time, modify_time)
-                VALUES(@title, @content, @status, @add_time, @modify_time);";
+                VALUES(@title, @content, @status, @add_time, @modify_time);select @@IDENTITY;";
 
                 string sql_insert2 = @"INSERT INTO[Comment]
                     (content_id, [content])
                 VALUES(@content_id, @content);";
 
-
+                conn.Open();
                 using (var tran = conn.BeginTransaction())
                 {
                     try
                     {
-                        DataTable inv = new DataTable();
-                        using (var reader = conn.ExecuteReader(sql_insert, contentWithCommnet, tran))
-                        {
-                            inv.Load(reader);
-                        }
-
-                        var contentId = Convert.ToInt32(inv.Rows[0]["id"].ToString());
+                        var contentId = Convert.ToInt32(conn.ExecuteScalar(sql_insert, contentWithCommnet, tran));
 
                         foreach (var comment in contentWithCommnet.comments)
                         {
@@ -192,6 +195,34 @@ select * from comment where content_id=@id;";
 
             }
         }
+
+
+        static void test_select_content_with_comment_join(string connectionString)
+        {
+            using (var conn = new SqlConnection(connectionString))
+            {
+                string sql_insert = @"select con.*,com.*
+from content con inner join comment com on con.id = com.content_id
+where con.id = @id";
+
+                var result = conn.Query<ContentWithComment, Comment, ContentWithComment>(sql_insert,
+                    (contentWithComment, comment) =>
+                    {
+                        if (contentWithComment.comments == null)
+                        {
+                            contentWithComment.comments = new List<Comment>();
+                        }
+
+                        contentWithComment.comments.AsList().Add(comment);
+                        return contentWithComment;
+                    },new{id= 23 });
+
+                result = result;
+
+            }
+        }
+
+
     }
 
     #region Class
