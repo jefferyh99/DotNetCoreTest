@@ -126,7 +126,7 @@ namespace TodoApi.Controllers
         [HttpGet("{id:long}")]
         //[HttpGet("{name:alpha}")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-       
+
         public async Task<ActionResult<TodoItem>> GetTodoItem([FromRoute]long id)
         {
             var todoItem = await _context.TodoItems.FindAsync(id);
@@ -146,7 +146,8 @@ namespace TodoApi.Controllers
         //[HttpGet("/Product")]//上升到根目錄
         //[HttpGet("/Product/{id}",Name = "Products_List")]
         //注意，很少会使用获取全部，通常都有参数，所以就拿最多参数的就可以，线上时用下面的带查询参数的，不用这个无参数的，除非没有查询的，有查询的话用下面的
-        [HttpGet]
+        [HttpGet("NoNeed")]
+        //[HttpGet("")]
         //[Authorize(Policy = "ScopePolicy")]
         public async Task<ActionResult<IEnumerable<TodoItem>>> GetTodoItems()
         {
@@ -156,7 +157,7 @@ namespace TodoApi.Controllers
         //数组用逗号隔开ssm.chukou1.com?querry1=a,b,c&querry2=d,e,f
         //Query1,
         [HttpGet("NoNeed")]
-        //[HttpGet]//会报错，因为不支持重载
+        //[HttpGet("")]//会报错，因为不支持重载
         public async Task<ActionResult<IEnumerable<TodoItem>>> GetTodoItemsByQuery1([FromQuery]TodoItem item)
         {
             if (item == null)
@@ -167,7 +168,7 @@ namespace TodoApi.Controllers
             {
                 return await _context.TodoItems.Where(p => p.Name.Equals(item.Name)).ToListAsync();
             }
-            
+
         }
 
         //Query2
