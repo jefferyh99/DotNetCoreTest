@@ -25,11 +25,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityService", "Identity
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OcelotTest", "OcelotTest\OcelotTest.csproj", "{CF6FC443-94AD-44CA-9C69-233F35FB903F}"
 EndProject
-<<<<<<< HEAD
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DockerTest", "DockerTest\DockerTest.csproj", "{E5E583FA-F1E3-45A9-916B-D7A00FC6786C}"
-=======
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapper.Test", "Dapper.Test\Dapper.Test.csproj", "{3E3AC376-E848-495B-A735-922831B0581D}"
->>>>>>> DotNetCoreTest/master
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DockerTest", "DockerTest\DockerTest.csproj", "{E5E583FA-F1E3-45A9-916B-D7A00FC6786C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dapper.Test", "Dapper.Test\Dapper.Test.csproj", "{3E3AC376-E848-495B-A735-922831B0581D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,17 +71,14 @@ Global
 		{CF6FC443-94AD-44CA-9C69-233F35FB903F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF6FC443-94AD-44CA-9C69-233F35FB903F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF6FC443-94AD-44CA-9C69-233F35FB903F}.Release|Any CPU.Build.0 = Release|Any CPU
-<<<<<<< HEAD
 		{E5E583FA-F1E3-45A9-916B-D7A00FC6786C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E5E583FA-F1E3-45A9-916B-D7A00FC6786C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5E583FA-F1E3-45A9-916B-D7A00FC6786C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5E583FA-F1E3-45A9-916B-D7A00FC6786C}.Release|Any CPU.Build.0 = Release|Any CPU
-=======
 		{3E3AC376-E848-495B-A735-922831B0581D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3E3AC376-E848-495B-A735-922831B0581D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E3AC376-E848-495B-A735-922831B0581D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E3AC376-E848-495B-A735-922831B0581D}.Release|Any CPU.Build.0 = Release|Any CPU
->>>>>>> DotNetCoreTest/master
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -98,11 +93,8 @@ Global
 		{86785397-D2B9-430E-87B7-93F7ADCBF087} = {3D2B6553-0D96-430E-B7BF-EC1C415BDCC8}
 		{CBBD0791-F7C4-479C-B4C6-6A19CC752FAC} = {3D2B6553-0D96-430E-B7BF-EC1C415BDCC8}
 		{CF6FC443-94AD-44CA-9C69-233F35FB903F} = {F2CAD961-DBE2-4A0B-A34C-99918A57B1CD}
-<<<<<<< HEAD
 		{E5E583FA-F1E3-45A9-916B-D7A00FC6786C} = {F2CAD961-DBE2-4A0B-A34C-99918A57B1CD}
-=======
 		{3E3AC376-E848-495B-A735-922831B0581D} = {3D2B6553-0D96-430E-B7BF-EC1C415BDCC8}
->>>>>>> DotNetCoreTest/master
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2E0AC939-51E8-48B4-A5C2-3F3757CB599B}
