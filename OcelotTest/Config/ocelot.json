@@ -1,0 +1,36 @@
+{
+  "ReRoutes": [
+    {
+      "UpstreamPathTemplate": "/supsp/{everything}", //上游路由模板
+      "UpstreamHttpMethod": [ "Get", "Post" ], //上游请求方法,空允许所有
+      "UpstreamHost": null, //上游主机Host
+      "DownstreamPathTemplate": "/api/shipment/{everything}", //下游路由模板
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ //下游端口及host
+        {
+          "Host": "supsp.test-ck1.cn",
+          "Port": 80
+        }
+      ],
+      "Priority": 0 //数值越大越优先
+    },
+    {
+      "UpstreamPathTemplate": "/sup/{everything}", //上游路由模板
+      "UpstreamHttpMethod": [ "Get", "Post" ], //上游请求方法,空允许所有
+      "UpstreamHost": "localhost:5000", //上游主机Host
+      "DownstreamPathTemplate": "/help", //下游路由模板
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ //下游端口及host
+        {
+          "Host": "sup.test-ck1.cn",
+          "Port": 80
+        }
+      ],
+      "Priority": 0 //数值越大越优先
+    }
+  ],
+  "GlobalConfiguration": { //全局配置，覆盖ReRoutes中的配置
+    "BaseUrl": "http://localhost:5000", //它应该是客户端将看到运行Ocelot的外部URL
+    "ReRouteIsCaseSensitive": false //不区分大小写
+  }
+}

@@ -10,7 +10,7 @@ namespace XUnitTestProject1
         public void Test1()
         {
             var a = "123";
-            a = a;
+            //a = a;
 
             var service = new TestService();
             var b = service.GetName();

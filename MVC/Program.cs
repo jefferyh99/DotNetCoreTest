@@ -64,6 +64,8 @@ namespace MVC
             //config.AddJsonFile("appsettings.json", true, true).AddJsonFile($"appsettings.{hostingEnvironment.EnvironmentName}.json", true, true);
             WebHost.CreateDefaultBuilder(args)
 
+            //注意，这边的配置是添加的，Add
+
             //自带默认log配置
             //.ConfigureLogging((hostingContext, logging) =>
             //{

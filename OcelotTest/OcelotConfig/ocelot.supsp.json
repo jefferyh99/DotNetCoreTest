@@ -1,0 +1,19 @@
+{
+  "ReRoutes": [
+    {
+      "UpstreamPathTemplate": "/supsp/{everything}", //上游路由模板
+      "UpstreamHttpMethod": [ "Get", "Post" ], //上游请求方法,空允许所有
+      "UpstreamHost": null, //上游主机Host
+      "DownstreamPathTemplate": "/api/shipment/{everything}", //下游路由模板
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ //下游端口及host
+        {
+          "Host": "supsp.test-ck1.cn",
+          "Port": 80
+        }
+      ],
+      "Priority": 0, //数值越大越优先
+      "RequestIdKey": "SupspRequestId"
+    }
+  ]
+}
