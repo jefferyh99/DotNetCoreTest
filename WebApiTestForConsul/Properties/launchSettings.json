@@ -4,8 +4,8 @@
     "windowsAuthentication": false, 
     "anonymousAuthentication": true, 
     "iisExpress": {
-      "applicationUrl": "http://localhost:60765",
-      "sslPort": 44393
+      "applicationUrl": "http://localhost:6856",
+      "sslPort": 0
     }
   },
   "profiles": {
@@ -17,11 +17,11 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "OcelotTest": {
+    "WebApiTestForConsul": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "supsp/ServiceNames",
-      "applicationUrl": "http://localhost:9999",
+      "launchUrl": "api/values",
+      "applicationUrl": "http://localhost:1234",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

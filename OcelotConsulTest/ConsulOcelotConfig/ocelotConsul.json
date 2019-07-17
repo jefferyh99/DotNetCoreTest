@@ -1,0 +1,15 @@
+{
+  "GlobalConfiguration": {
+    "ServiceDiscoveryProvider": {
+      "Host": "localhost",
+      "Port": 8500,
+      "Type": "PollConsul",
+      "PollingInterval": 100
+    },
+    "RateLimitOptions": {
+      "ClientIdHeader": "client_id",
+      "QuotaExceededMessage": "Too Many Requests!!!",
+      "DisableRateLimitHeaders": false
+    }
+  }
+}

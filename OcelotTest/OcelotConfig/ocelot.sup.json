@@ -3,7 +3,7 @@
     {
       "UpstreamPathTemplate": "/sup/{everything}", //上游路由模板
       "UpstreamHttpMethod": [ "Get", "Post" ], //上游请求方法,空允许所有
-      "UpstreamHost": "localhost:5000", //上游主机Host
+      "UpstreamHost": "localhost:9999", //上游主机Host
       "DownstreamPathTemplate": "/help", //下游路由模板
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [ //下游端口及host
@@ -13,7 +13,8 @@
         }
       ],
       "Priority": 0, //数值越大越优先
-      "RequestIdKey": "SupRequestId"
+      "RequestIdKey": "SupRequestId",
+      "Key": "sup"
     }
   ]
 }

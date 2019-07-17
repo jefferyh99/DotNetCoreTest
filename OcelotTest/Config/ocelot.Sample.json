@@ -18,7 +18,7 @@
       "ReRouteIsCaseSensitive": false,
       "ServiceName": null,
       "DownstreamScheme": "http",
-      "QoSOptions": { //Qos相关配置
+      "QoSOptions": { //Qos相关配置,断路器
         "ExceptionsAllowedBeforeBreaking": 0,
         "DurationOfBreak": 0,
         "TimeoutValue": 0

@@ -1,6 +1,6 @@
 {
   "GlobalConfiguration": { //全局配置，覆盖ReRoutes中的配置
-    "BaseUrl": "http://localhost:5000", //它应该是客户端将看到运行Ocelot的外部URL
+    "BaseUrl": "http://localhost:9999", //它应该是客户端将看到运行Ocelot的外部URL
     "ReRouteIsCaseSensitive": false, //不区分大小写
     "RequestIdKey": "GlobalRequestId"
   }

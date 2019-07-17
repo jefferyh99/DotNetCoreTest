@@ -14,6 +14,36 @@
       ],
       "Priority": 0, //数值越大越优先
       "RequestIdKey": "SupspRequestId"
+    },
+    {
+      "UpstreamPathTemplate": "/supsp/CancelServiceNames/{everything}", //上游路由模板
+      "UpstreamHttpMethod": [ "Get" ], //上游请求方法,空允许所有
+      "UpstreamHost": null, //上游主机Host
+      "DownstreamPathTemplate": "/api/shipment/CancelServiceNames", //下游路由模板
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ //下游端口及host
+        {
+          "Host": "supsp.test-ck1.cn",
+          "Port": 80
+        }
+      ],
+      "Priority": 0, //数值越大越优先
+      "Key": "CancelServiceNames"
+    },
+    {
+      "UpstreamPathTemplate": "/supsp/ManifestServiceNames/{everything}", //上游路由模板
+      "UpstreamHttpMethod": [ "Get" ], //上游请求方法,空允许所有
+      "UpstreamHost": null, //上游主机Host
+      "DownstreamPathTemplate": "/api/shipment/ManifestServiceNames", //下游路由模板
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ //下游端口及host
+        {
+          "Host": "supsp.test-ck1.cn",
+          "Port": 80
+        }
+      ],
+      "Priority": 0, //数值越大越优先
+      "Key": "ManifestServiceNames"
     }
   ]
 }

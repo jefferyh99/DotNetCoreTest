@@ -1,0 +1,26 @@
+{
+  ////全部抓(优先级最低)
+  //"ReRoutes": [
+  //  {
+  //    "DownstreamPathTemplate": "/{url}",
+  //    "DownstreamScheme": "http",
+  //    "DownstreamHostAndPorts": [
+  //      {
+  //        "Host": "localhost",
+  //        "Port": 9999
+  //      }
+  //    ],
+  //    "UpstreamPathTemplate": "/{url}",
+  //    "UpstreamHttpMethod": [ "Get" ]
+  //  }
+  //],
+  "Aggregates": [
+    {
+      "ReRouteKeys": [
+        "CancelServiceNames",
+        "ManifestServiceNames"
+      ],
+      "UpstreamPathTemplate": "/combine/supsp/{everything}"
+    }
+  ]
+}
