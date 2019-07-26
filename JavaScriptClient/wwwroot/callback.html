@@ -5,11 +5,13 @@
     <title></title>
 </head>
 <body>
+    <div id="results"></div>
     <script src="oidc-client.js"></script>
     <script>new Oidc.UserManager({ response_mode: "query" }).signinRedirectCallback().then(function () {
             window.location = "index.html";
         }).catch(function (e) {
             console.error(e);
+            document.getElementById("results").innerHTML = e;
         });</script>
 </body>
 </html>
