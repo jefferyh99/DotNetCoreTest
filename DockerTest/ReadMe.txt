@@ -14,6 +14,6 @@ docker ps -a
 官方命令：
 https://docs.microsoft.com/zh-cn/dotnet/core/tools/dotnet-run?tabs=netcore21
 
-dotnet run //直接运行.csproj中的项目
+dotnet run //直接运行.csproj中的项目，不是编译完的话，推荐这种方式。
 dotnet run --urls="http://localhost:10000" //直接运行.csproj中的项目
-dotnet a.dll --urls="http://localhost:10000"//运行编译后的dll
+dotnet a.dll --urls="http://localhost:10000"//运行编译后的dll，如果没有编译的话，可能一些配置项不会进去。

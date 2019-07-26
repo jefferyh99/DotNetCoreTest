@@ -1,0 +1,196 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="node_modules\oidc-client\bower.json" />
+    <Content Include="node_modules\oidc-client\jsconfig.json" />
+    <Content Include="node_modules\oidc-client\jsrsasign\ext\cj\THIRDPARTY_LICENSE.cryptojs.txt" />
+    <Content Include="node_modules\oidc-client\jsrsasign\ext\THIRDPARTY_LICENSE.bitcoin.txt" />
+    <Content Include="node_modules\oidc-client\jsrsasign\ext\THIRDPARTY_LICENSE.cryptojs.txt" />
+    <Content Include="node_modules\oidc-client\jsrsasign\ext\THIRDPARTY_LICENSE.jsonsans.txt" />
+    <Content Include="node_modules\oidc-client\jsrsasign\ext\THIRDPARTY_LICENSE.tomwu.txt" />
+    <Content Include="node_modules\oidc-client\jsrsasign\ext\THIRDPARTY_LICENSE.yui.txt" />
+    <Content Include="node_modules\oidc-client\package.json" />
+    <Content Include="node_modules\uuid\.eslintrc.json" />
+    <Content Include="node_modules\uuid\package.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="node_modules\.bin\uuid" />
+    <None Include="node_modules\.bin\uuid.cmd" />
+    <None Include="node_modules\oidc-client\.gitattributes" />
+    <None Include="node_modules\oidc-client\dist\oidc-client.js" />
+    <None Include="node_modules\oidc-client\dist\oidc-client.min.js" />
+    <None Include="node_modules\oidc-client\dist\oidc-client.rsa256.slim.js" />
+    <None Include="node_modules\oidc-client\dist\oidc-client.rsa256.slim.min.js" />
+    <None Include="node_modules\oidc-client\dist\oidc-client.slim.js" />
+    <None Include="node_modules\oidc-client\dist\oidc-client.slim.min.js" />
+    <None Include="node_modules\oidc-client\GitReleaseManager.yaml" />
+    <None Include="node_modules\oidc-client\gulpfile.js" />
+    <None Include="node_modules\oidc-client\index.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\dist\jsrsasign.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\base64-min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\base64.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\cj\aes.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\cj\aes_min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\cj\cipher-core.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\cj\cipher-core_min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\cj\core-min.js.ORG" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\cj\core.js.ORG" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\cj\cryptojs-312-core-fix-min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\cj\cryptojs-312-core-fix.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\cj\enc-base64.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\cj\enc-base64_min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\cj\hmac.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\cj\hmac_min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\cj\md5.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\cj\md5_min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\cj\pbkdf2.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\cj\pbkdf2_min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\cj\ripemd160.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\cj\ripemd160_min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\cj\sha1.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\cj\sha1_min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\cj\sha224.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\cj\sha224_min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\cj\sha256.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\cj\sha256_min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\cj\sha384.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\cj\sha384_min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\cj\sha512.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\cj\sha512_min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\cj\tripledes.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\cj\tripledes_min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\cj\x64-core.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\cj\x64-core_min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\ec-min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\ec-patch-min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\ec-patch.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\ec.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\jsbn-min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\jsbn.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\jsbn2-min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\jsbn2.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\json-sans-eval-min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\json-sans-eval.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\prng4-min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\prng4.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\rng-min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\rng.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\rsa-min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\rsa.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\rsa2-min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\rsa2.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\yahoo-min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\yahoo-min.js.ORG" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\yahoo.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\ext\yahoo.js.ORG" />
+    <None Include="node_modules\oidc-client\jsrsasign\footer.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\header.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\min\asn1-1.0.min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\min\asn1cades-1.0.min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\min\asn1cms-1.0.min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\min\asn1csr-1.0.min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\min\asn1hex-1.1.min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\min\asn1ocsp-1.0.min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\min\asn1tsp-1.0.min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\min\asn1x509-1.0.min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\min\base64x-1.1.min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\min\crypto-1.1.min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\min\dsa-2.0.min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\min\ecdsa-modified-1.0.min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\min\ecparam-1.0.min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\min\jws-3.3.min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\min\jwsjs-2.0.min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\min\keyutil-1.0.min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\min\nodeutil-1.0.min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\min\rsapem-1.1.min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\min\rsasign-1.2.min.js" />
+    <None Include="node_modules\oidc-client\jsrsasign\min\x509-1.1.min.js" />
+    <None Include="node_modules\oidc-client\lib\oidc-client.js" />
+    <None Include="node_modules\oidc-client\lib\oidc-client.min.js" />
+    <None Include="node_modules\oidc-client\LICENSE" />
+    <None Include="node_modules\oidc-client\polyfills.js" />
+    <None Include="node_modules\oidc-client\README.md" />
+    <None Include="node_modules\oidc-client\src\AccessTokenEvents.js" />
+    <None Include="node_modules\oidc-client\src\CheckSessionIFrame.js" />
+    <None Include="node_modules\oidc-client\src\CordovaIFrameNavigator.js" />
+    <None Include="node_modules\oidc-client\src\CordovaPopupNavigator.js" />
+    <None Include="node_modules\oidc-client\src\CordovaPopupWindow.js" />
+    <None Include="node_modules\oidc-client\src\crypto\jsrsasign.js" />
+    <None Include="node_modules\oidc-client\src\crypto\rsa.js" />
+    <None Include="node_modules\oidc-client\src\ErrorResponse.js" />
+    <None Include="node_modules\oidc-client\src\Event.js" />
+    <None Include="node_modules\oidc-client\src\Global.js" />
+    <None Include="node_modules\oidc-client\src\IFrameNavigator.js" />
+    <None Include="node_modules\oidc-client\src\IFrameWindow.js" />
+    <None Include="node_modules\oidc-client\src\InMemoryWebStorage.js" />
+    <None Include="node_modules\oidc-client\src\JoseUtil.js" />
+    <None Include="node_modules\oidc-client\src\JoseUtilImpl.js" />
+    <None Include="node_modules\oidc-client\src\JoseUtilRsa.js" />
+    <None Include="node_modules\oidc-client\src\JsonService.js" />
+    <None Include="node_modules\oidc-client\src\Log.js" />
+    <None Include="node_modules\oidc-client\src\MetadataService.js" />
+    <None Include="node_modules\oidc-client\src\OidcClient.js" />
+    <None Include="node_modules\oidc-client\src\OidcClientSettings.js" />
+    <None Include="node_modules\oidc-client\src\PopupNavigator.js" />
+    <None Include="node_modules\oidc-client\src\PopupWindow.js" />
+    <None Include="node_modules\oidc-client\src\random.js" />
+    <None Include="node_modules\oidc-client\src\RedirectNavigator.js" />
+    <None Include="node_modules\oidc-client\src\ResponseValidator.js" />
+    <None Include="node_modules\oidc-client\src\SessionMonitor.js" />
+    <None Include="node_modules\oidc-client\src\SigninRequest.js" />
+    <None Include="node_modules\oidc-client\src\SigninResponse.js" />
+    <None Include="node_modules\oidc-client\src\SigninState.js" />
+    <None Include="node_modules\oidc-client\src\SignoutRequest.js" />
+    <None Include="node_modules\oidc-client\src\SignoutResponse.js" />
+    <None Include="node_modules\oidc-client\src\SilentRenewService.js" />
+    <None Include="node_modules\oidc-client\src\State.js" />
+    <None Include="node_modules\oidc-client\src\Timer.js" />
+    <None Include="node_modules\oidc-client\src\TokenClient.js" />
+    <None Include="node_modules\oidc-client\src\TokenRevocationClient.js" />
+    <None Include="node_modules\oidc-client\src\UrlUtility.js" />
+    <None Include="node_modules\oidc-client\src\User.js" />
+    <None Include="node_modules\oidc-client\src\UserInfoService.js" />
+    <None Include="node_modules\oidc-client\src\UserManager.js" />
+    <None Include="node_modules\oidc-client\src\UserManagerEvents.js" />
+    <None Include="node_modules\oidc-client\src\UserManagerSettings.js" />
+    <None Include="node_modules\oidc-client\src\WebStorageStateStore.js" />
+    <None Include="node_modules\oidc-client\webpack.base.js" />
+    <None Include="node_modules\uuid\AUTHORS" />
+    <None Include="node_modules\uuid\bin\uuid" />
+    <None Include="node_modules\uuid\CHANGELOG.md" />
+    <None Include="node_modules\uuid\index.js" />
+    <None Include="node_modules\uuid\lib\bytesToUuid.js" />
+    <None Include="node_modules\uuid\lib\md5-browser.js" />
+    <None Include="node_modules\uuid\lib\md5.js" />
+    <None Include="node_modules\uuid\lib\rng-browser.js" />
+    <None Include="node_modules\uuid\lib\rng.js" />
+    <None Include="node_modules\uuid\lib\sha1-browser.js" />
+    <None Include="node_modules\uuid\lib\sha1.js" />
+    <None Include="node_modules\uuid\lib\v35.js" />
+    <None Include="node_modules\uuid\LICENSE.md" />
+    <None Include="node_modules\uuid\README.md" />
+    <None Include="node_modules\uuid\README_js.md" />
+    <None Include="node_modules\uuid\v1.js" />
+    <None Include="node_modules\uuid\v3.js" />
+    <None Include="node_modules\uuid\v4.js" />
+    <None Include="node_modules\uuid\v5.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="node_modules\oidc-client\dist\oidc-client.d.ts" />
+    <TypeScriptCompile Include="node_modules\oidc-client\index.d.ts" />
+  </ItemGroup>
+
+</Project>

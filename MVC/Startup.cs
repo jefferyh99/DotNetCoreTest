@@ -58,6 +58,10 @@ namespace MVC
             //});
 
 
+            //中文乱码
+            //services.AddSingleton(System.Text.Encodings.Web.HtmlEncoder.Create(System.Text.Unicode.UnicodeRanges.All));
+
+
 
             //services.Configure<WebEncoderOptions>(options =>options.TextEncoderSettings = new TextEncoderSettings(UnicodeRanges.BasicLatin,UnicodeRanges.CjkUnifiedIdeographs));
             #endregion
