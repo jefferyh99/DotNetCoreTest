@@ -34,7 +34,7 @@ namespace IdentityServiceEF
         public void ConfigureServices(IServiceCollection services)
         {
 
-            string connectionString = Configuration.GetValue<string>("ConnectionString");
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             //结果IdentityServiceEF
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
