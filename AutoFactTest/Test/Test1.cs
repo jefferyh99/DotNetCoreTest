@@ -9,6 +9,7 @@ namespace AutoFactTest
     {
         public string GetTestName()
         {
+            Console.WriteLine("service calling...");
             return "I am Test1";
         }
     }

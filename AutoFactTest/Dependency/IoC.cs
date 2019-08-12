@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace AutoFactTest.Dependency
 {
+    /// <summary>
+    /// 这是一种反模式设计，能不用的话尽量不要用
+    /// </summary>
     public static class IoC
     {
         private static IDependencyResolver _dependencyResolver;
