@@ -36,7 +36,7 @@ namespace AspNetIdentity
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
-                
+                .AddDefaultUI(UIFramework.Bootstrap4)//添加注册服务UI，再需要添加Area文件夹
                 .AddDefaultTokenProviders();
             #endregion
 
