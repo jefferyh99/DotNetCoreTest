@@ -49,7 +49,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServiceEF", "Identi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetIdentity", "AspNetIdentity\AspNetIdentity.csproj", "{679CA985-8935-43E4-B2D1-80EA2F11C8E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetIdentityRegister", "AspNetIdentityRegister\AspNetIdentityRegister.csproj", "{089F6EC9-B6F7-4229-8001-C2238A3772E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetIdentityRegister", "AspNetIdentityRegister\AspNetIdentityRegister.csproj", "{089F6EC9-B6F7-4229-8001-C2238A3772E1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatRWebTest", "MediatRWebTest\MediatRWebTest.csproj", "{914B22F6-0F6C-4E35-A582-0F6FD19CB6FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -141,6 +143,10 @@ Global
 		{089F6EC9-B6F7-4229-8001-C2238A3772E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{089F6EC9-B6F7-4229-8001-C2238A3772E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{089F6EC9-B6F7-4229-8001-C2238A3772E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{914B22F6-0F6C-4E35-A582-0F6FD19CB6FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{914B22F6-0F6C-4E35-A582-0F6FD19CB6FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{914B22F6-0F6C-4E35-A582-0F6FD19CB6FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{914B22F6-0F6C-4E35-A582-0F6FD19CB6FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -167,6 +173,7 @@ Global
 		{0D446536-C058-4375-948A-ECA88B73FFB1} = {F4FC9260-4973-4F8F-AA4F-73E98CCDAE3C}
 		{679CA985-8935-43E4-B2D1-80EA2F11C8E1} = {F4FC9260-4973-4F8F-AA4F-73E98CCDAE3C}
 		{089F6EC9-B6F7-4229-8001-C2238A3772E1} = {F4FC9260-4973-4F8F-AA4F-73E98CCDAE3C}
+		{914B22F6-0F6C-4E35-A582-0F6FD19CB6FE} = {3D2B6553-0D96-430E-B7BF-EC1C415BDCC8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2E0AC939-51E8-48B4-A5C2-3F3757CB599B}

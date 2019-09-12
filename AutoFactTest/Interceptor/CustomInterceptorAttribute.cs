@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace AutoFactTest.Interceptor
 {
-
+    /// <summary>
+    /// 面向切面 Aop AspectCore
+    /// </summary>
     public class CustomInterceptorAttribute : AbstractInterceptorAttribute
     {
         private readonly string _name;
