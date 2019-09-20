@@ -84,6 +84,12 @@ namespace MVC
                 logging.ClearProviders();
                 logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
             })
+             .ConfigureAppConfiguration((hostingContext, config) => {
+
+                 //虽然这边是Add，但是.net core会同名覆盖，已经使用IOptionsMonitor验证过了
+                 config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: false);
+                 config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+             })
             .UseNLog();  // NLog: setup NLog for Dependency injection
        
 
