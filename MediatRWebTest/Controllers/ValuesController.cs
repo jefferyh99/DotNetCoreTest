@@ -28,7 +28,7 @@ namespace MediatRWebTest.Controllers
             //https://github.com/jbogard/MediatR/wiki
             var response = Mediator.Send(new Ping());
 
-            Mediator.Publish(new PingNotification());
+            //Mediator.Publish(new PingNotification());
 
             return new string[] { response.Result, "value2" };
         }

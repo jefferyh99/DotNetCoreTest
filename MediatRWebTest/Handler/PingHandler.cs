@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using MediatRWebTest.Request;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,8 +22,15 @@ namespace MediatRWebTest.Handler
 
     public class PingHandler : IRequestHandler<Ping, string>
     {
+        private readonly ILogger _logger;
+        public PingHandler(ILogger<PingHandler> logger)
+        {
+            _logger = logger;
+        }
+
         public Task<string> Handle(Ping request, CancellationToken cancellationToken)
         {
+            _logger.LogError($"PingHandler");
             return Task.FromResult("Pong");
         }
     }
