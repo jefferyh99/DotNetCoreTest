@@ -4,8 +4,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using MVC.Models;
+
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MVC.Controllers
 {
@@ -13,9 +16,16 @@ namespace MVC.Controllers
     {
         private readonly ILogger _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IConfiguration _configuration;
+
+        //微软官方全局资源定位器
+        private readonly IServiceProvider _serviceProvider;
+
+        public HomeController(ILogger<HomeController> logger, IConfiguration configuration, IServiceProvider serviceProvider)
         {
             _logger = logger;
+            _configuration = configuration;
+            _serviceProvider = serviceProvider;
         }
 
         public IActionResult Index()
@@ -27,6 +37,10 @@ namespace MVC.Controllers
             _logger.LogError("HomeController _logger.LogError");
             _logger.LogCritical("HomeController _logger.LogCritical");
 
+            var config = _configuration.GetValue<string>("Logging:LogLevel:Default");
+
+            var a = _serviceProvider.GetRequiredService<IConfiguration>();
+            var result1 = a.GetValue<string>("Logging:LogLevel:Default");
 
             return View();
         }
