@@ -47,7 +47,7 @@ namespace AutoFactTest
 
             #region Aspect
 
-
+            //https://github.com/dotnetcore/AspectCore-Framework/blob/master/extras/sample/AspectCore.Extensions.Autofac.WebSample/Startup.cs
             containerBuilder.RegisterDynamicProxy(config =>
                 {
                     //过滤器
