@@ -31,6 +31,8 @@ namespace MediatRWebTest
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             //加载当前assembly中的所有数据
+            //https://github.com/jbogard/MediatR.Extensions.Microsoft.DependencyInjection
+            //Scans assemblies and adds handlers, preprocessors, and postprocessors implementations to the container
             services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
 
             //一样的效果
@@ -39,9 +41,16 @@ namespace MediatRWebTest
 
 
             //依赖注入,按注册顺序来执行管道（每一次请求），这边的注册需要手动注册，因为需要确定顺序，这边的执行顺序为：
-            //
+            
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingTwoBehavior<,>));
+
+            //说明：如果是继承多个IRequestPostProcessor与IRequestPostProcessor，他们的注册顺序不能指定，mediatr会默认执行。
+            //只会坚持在请求执行前执行，与请求执行后执行。
+
+            //如果需要有特定顺序的话，继承IPipelineBehavior，并按顺序注册即可。
+            //只有IRequestHandler<TRequest,TResponse>才能使用Behavior，INotificationHandler<TRequest>不能使用
+
 
             //Pre-LoggingBehavior-LoggingTwoBehavior-Post
 
