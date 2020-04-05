@@ -51,6 +51,13 @@ var config = {
     post_logout_redirect_uri: "http://localhost:5003/index.html",
 };
 var mgr = new Oidc.UserManager(config);
+
+
+
+
+mgr.signinRedirectCallback();
+
+
 mgr.getUser().then(function (user) {
     if (user) {
         console.log(user);

@@ -17,6 +17,7 @@ namespace Client
             var client = new HttpClient();
 
             //http://localhost:5000/.well-known/openid-configuration
+            //可调用的所有Endpoint地址
             var disco = await client.GetDiscoveryDocumentAsync("http://localhost:5000");
             if (disco.IsError)
             {
@@ -25,21 +26,24 @@ namespace Client
                 return;
             }
 
-            await ResourceOwnerPassword(disco);
-
+            //await ResourceOwnerPassword(disco);
+            await ClientCredentials(disco);
 
         }
 
         private static async Task ClientCredentials(DiscoveryResponse disco)
         {
+
             var client = new HttpClient();
-            // request token
+            // request access token
+            //获取token
             var tokenResponse = await client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
             {
                 Address = disco.TokenEndpoint,//http://localhost:5000/connect/token
                 ClientId = "client",//客户名字
                 ClientSecret = "secret",//密码
-                Scope = "api1"//需要访问的API，或者说需要获得的API访问权限，需要当前客户下有对应的Scope才会赋予权限
+                Scope = "api1 openid ",//需要访问的API，或者说需要获得的API访问权限，需要当前客户下有对应的Scope才会赋予权限，重点：多个scope用空格分开
+                
             });
 
             if (tokenResponse.IsError)

@@ -1,4 +1,5 @@
-﻿using IdentityServer4;
+﻿using IdentityModel;
+using IdentityServer4;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
 using System;
@@ -17,9 +18,13 @@ namespace IdentityServiceNew
         /// <returns></returns>
         public static IEnumerable<ApiResource> GetApis()
         {
+            //在scopes出现
             return new List<ApiResource>
             {
-                new ApiResource("api1", "My API1 DisplayName"),
+                new ApiResource("api1", "My API1 DisplayName",new List<string>{ "location"})
+                {
+                    ApiSecrets = { new Secret("api1 secret".Sha256())},//当api需要身份验证时，就需要用到这个secret
+                },
                 new ApiResource("api2", "My API2 DisplayName")
             };
         }
@@ -47,6 +52,7 @@ namespace IdentityServiceNew
                     // scopes that client has access to
                     //允许的范围
                     AllowedScopes = { "api1" },//允许获得权限的API名字范围
+                    
                 },
 
                 // resource owner password grant client
@@ -75,21 +81,26 @@ namespace IdentityServiceNew
                     // where to redirect to after logout
                     PostLogoutRedirectUris = { "http://localhost:5002/signout-callback-oidc" },
 
+
+                    AlwaysIncludeUserClaimsInIdToken = false,
+
                     AllowedScopes = new List<string>
                     {
                         IdentityServerConstants.StandardScopes.OpenId,//subject id
                         IdentityServerConstants.StandardScopes.Profile//first name, last name etc..对应的是GetUsers里面的用户数据
                     }
                 },
-                //推荐做法
+                //mvc
                 new Client
                 {
                     ClientId = "mvc",
                     ClientName = "MVC Client",
-                    AllowedGrantTypes = GrantTypes.Hybrid,//Hybrid flow is a combination of the implicit and authorization code flow（It is used for server-side web applications and native desktop/mobile applications.）
-
+                     //推荐做法
+                    //AllowedGrantTypes = GrantTypes.Hybrid,//Hybrid flow is a combination of the implicit and authorization code flow（It is used for server-side web applications and native desktop/mobile applications.）
+                    AllowedGrantTypes = GrantTypes.CodeAndClientCredentials,
                     RedirectUris = { "http://localhost:5002/signin-oidc" },
                     PostLogoutRedirectUris = { "http://localhost:5002/signout-callback-oidc" },
+                    FrontChannelLogoutUri = "http://localhost:5002/signout-oidc",
 
                     ClientSecrets =
                     {
@@ -100,11 +111,21 @@ namespace IdentityServiceNew
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
-                        "api1" //允许获得权限的API名字范围
+                        "api1", //允许获得权限的API名字范围,
+                        IdentityServerConstants.StandardScopes.Email,
+                        IdentityServerConstants.StandardScopes.Address,
+                        IdentityServerConstants.StandardScopes.Phone,
+
+
+
                     },
-                    AllowOfflineAccess = true
+                    AllowOfflineAccess = true,
+                    AccessTokenLifetime = 60,//60seconds
+                    
                 },
                 //https://identityserver4.readthedocs.io/en/latest/topics/grant_types.html
+
+
                 // JavaScript Client
                 new Client
                 {
@@ -124,6 +145,62 @@ namespace IdentityServiceNew
                         IdentityServerConstants.StandardScopes.Profile,
                         "api1"
                     }
+                },
+
+                 //angular
+                new Client
+                {
+                    ClientId = "angular-client",
+                    ClientName = "angular spa 客戶端",
+                    ClientUri = "http://localhost:4200",
+
+                    AllowedGrantTypes = GrantTypes.Implicit,//Authorization code，授权码模式，内部实现了授权码，直接返回了AccessToken
+                    RequireConsent = true,
+                    AllowAccessTokensViaBrowser = true,
+                    AccessTokenLifetime = 60*5,
+
+                    //登錄成功後回調
+                    RedirectUris =           { "http://localhost:4200/signin-oidc","http://localhost:4200/redirect-silentrenew" },//後面這個用於自動刷新
+                    PostLogoutRedirectUris = { "http://localhost:4200" },
+                    AllowedCorsOrigins =     { "http://localhost:4200" },
+
+                    AllowedScopes =
+                    {
+                         IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "api1", //允许获得权限的API名字范围,
+                        IdentityServerConstants.StandardScopes.Email,
+                        IdentityServerConstants.StandardScopes.Address,
+                        IdentityServerConstants.StandardScopes.Phone,
+                    }
+                },
+
+                //hybird
+                new Client()
+                {
+                    ClientId = "hybird client",
+                    ClientName = "ASP.NET Core Hybird 客户端",
+                    ClientSecrets = {new Secret("hybird secret".Sha256())},
+                    AllowedGrantTypes = new []{GrantType.Hybrid },
+                    RedirectUris = { "http://localhost:5002/signin-oidc" },
+                    PostLogoutRedirectUris = { "http://localhost:5002/signout-callback-oidc" },
+                    FrontChannelLogoutUri = "http://localhost:5002/signout-oidc",
+                    AllowOfflineAccess=true,//是否允许申请refresh token，
+                    AccessTokenType = AccessTokenType.Reference,//jwt不会每次都验证token，里面有包含过期等信息，自适应的。reference的话每次都需要调用ldp服务去验证，会频繁验证
+                    AlwaysIncludeUserClaimsInIdToken=true,
+                    //允许客户端请求获得的所有权限
+                    AllowedScopes=
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "api1", //允许获得权限的API名字范围,
+                        IdentityServerConstants.StandardScopes.Email,
+                        IdentityServerConstants.StandardScopes.Address,
+                        IdentityServerConstants.StandardScopes.Phone,
+                        "roles",
+                        "locations",
+                    },
+
                 }
             };
         }
@@ -159,19 +236,31 @@ namespace IdentityServiceNew
                     Claims = new []
                     {
                         new Claim("name", "Bob"),
-                        new Claim("website", "https://bob.com")
+                        new Claim("website", "https://bob.com"),
+                        new Claim("location","somewhere"),
+                        new Claim(JwtClaimTypes.FamilyName,"Smith"),
+                        new Claim(JwtClaimTypes.GivenName,"Bob"),
                     }
                 }
             };
         }
-
+        //https://github.com/solenovex/Identity-Server-4-Tutorial-Demo-Code/blob/master/07-08.%20Hybrid%20Flow%20-%20MVC%20Client/Idp/Config.cs
         public static IEnumerable<IdentityResource> GetIdentityResources()
         {
             return new IdentityResource[]
             {
                 new IdentityResources.OpenId(),//subject id
-                new IdentityResources.Profile()//first name, last name etc..
+                new IdentityResources.Profile(),//first name, last name etc..
+                new IdentityResources.Address(),
+                new IdentityResources.Phone(),
+                new IdentityResources.Email(),
+                new IdentityResource("roles","角色",new List<string>{JwtClaimTypes.Role }),
+                new IdentityResource("locations","地点",new List<string>{"location"}),//前面是scope，后面是claimType
+                //allowScpoe以一个IdentityResource为范围，一个IdentityResource能包含多个后面是claimType，用户携带的是claimType
             };
+
+
         }
+
     }
 }

@@ -61,9 +61,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitMqTest", "RabbitMqTes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeepCopyTest", "DeepCopyTest\DeepCopyTest.csproj", "{C1511029-7A7B-415F-8B7F-8AABD410B95E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderNumberGenerator", "OrderNumberGenerator\OrderNumberGenerator.csproj", "{9A42E063-3F4C-468E-9609-5F143C71DCEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderNumberGenerator", "OrderNumberGenerator\OrderNumberGenerator.csproj", "{9A42E063-3F4C-468E-9609-5F143C71DCEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniqueOrderNumberGenerator", "UniqueOrderNumberGenerator\UniqueOrderNumberGenerator.csproj", "{B42E751B-1EC7-4CA6-8ADD-4B5025F7B643}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniqueOrderNumberGenerator", "UniqueOrderNumberGenerator\UniqueOrderNumberGenerator.csproj", "{B42E751B-1EC7-4CA6-8ADD-4B5025F7B643}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewIdentityServiceFlow", "NewIdentityServiceFlow", "{11C0789A-5B95-47EB-B96F-F368BE7D84AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

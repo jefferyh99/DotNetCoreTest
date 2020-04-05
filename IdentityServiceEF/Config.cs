@@ -124,7 +124,10 @@ namespace IdentityServiceEF
                         IdentityServerConstants.StandardScopes.Profile,
                         "api1"
                     }
-                }
+                },
+
+               
+
             };
         }
 
